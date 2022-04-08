@@ -1,0 +1,48 @@
+# Python program for edit distance problem using 
+# Dynamic Programming Approach
+
+# Create a table to store results of subproblems 
+def table():
+    return [[0 for i in range(M + 1)] for j in range(N + 1)] 
+
+# function to find minimum number operations 
+#required to convert string Str_1 into Str_2.
+def Edit_Distance_Problem(Str_1, Str_2, N, M): 
+
+    # Fill d[][] in bottom up manner 
+    for i in range(N + 1): 
+        for j in range(M + 1): 
+
+            if j == 0: 
+                Table[i][j] = i
+
+            elif i == 0: 
+                Table[i][j] = j  
+
+            elif Str_1[i-1] == Str_2[j-1]: 
+                Table[i][j] = Table[i-1][j-1] 
+
+            else: 
+                Table[i][j] = 1 + min(Table[i-1][j-1], Table[i-1][j],Table[i][j-1])
+
+    # returning the result
+    return Table[N][M] 
+
+# Driver program 
+
+# Given two strings
+Str_1 = "Big"
+Str_2 = "Bang"
+
+# Sizes of the strings
+N = len(Str_1) 
+M = len(Str_2)
+
+# create the Table
+Table = table()
+
+# Function calling
+Solution = Edit_Distance_Problem(Str_1, Str_2, N, M)
+
+# printing the solution
+print(Solution)
